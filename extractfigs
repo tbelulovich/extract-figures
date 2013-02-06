@@ -1,0 +1,12 @@
+boxes(){
+   convert $1 text:- | grep magenta | awk '{ print substr($1,1,length($1)-1) }' | ./boxes
+}
+
+
+i=0;
+
+for g in $(boxes $1); do
+    echo "convert -density 288 $1 -crop $g fig${i}.png";
+    convert -density 288 $1 -crop $g fig${i}.png;
+    i=`expr $i + 1`;
+done;
